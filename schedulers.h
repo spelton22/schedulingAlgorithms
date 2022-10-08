@@ -6,10 +6,3 @@ void add(char *name, int priority, int burst);
 
 // invoke the scheduler
 void schedule();
-
-// struct for tasks
-struct task {
-    char* name;
-    int priority;
-    int burst;
-};

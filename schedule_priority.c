@@ -6,9 +6,9 @@
 #include "list.h"
 #include "CPU.h"
 
-/* Shortest Job First scheduler
- * Looks at the cpu burst time and
- * sends the shortest jobs to the 
+/* Priority scheduler
+ * Looks at the priority number and
+ * sends the highest priority jobs to the 
  * cpu first.
 */
 
@@ -27,19 +27,19 @@ void schedule() {
     while (head != NULL) {
         struct node* tempNode = head;
         struct task* tempTask = head->task;
-        struct task* quickestTask = tempTask;
+        struct task* highestPriority = tempTask;
 
-        // find the shortest job
+        // find the highest priority job
         while (tempNode->next != NULL) {
             tempNode = tempNode->next;
             tempTask = tempNode->task;
-            if (tempTask->burst < quickestTask->burst) {
-                quickestTask = tempTask;
+            if (tempTask->priority > highestPriority->priority) {
+                highestPriority = tempTask;
             }
         }
 
-        // run the shortest job & remove from list
-        run(quickestTask, quickestTask->burst);
-        delete(&head, quickestTask);
+        // run the highest priority job & remove from list
+        run(highestPriority, highestPriority->priority);
+        delete(&head, highestPriority);
     }
 }
