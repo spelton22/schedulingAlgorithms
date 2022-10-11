@@ -17,7 +17,21 @@ void insert(struct node **head, Task *newTask) {
 
     newNode->task = newTask;
     newNode->next = *head;
-    *head = newNode;
+    *head = newNode; 
+}
+
+void insertTail(struct node **tail, struct node **head, Task *newTask) {
+    // add the new task to the list 
+    struct node *newNode = malloc(sizeof(struct node));
+
+    newNode->task = newTask;
+    newNode->next = NULL;
+    if(*tail != NULL){
+        (*tail)->next = newNode;
+    }else{
+        *head = newNode;
+    }
+    *tail = newNode;
 }
 
 // delete the selected task from the list
